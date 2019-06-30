@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">XSpaceCrack</string>
+
+    <string name="db_path">
+        /data/user/0/com.godinsec.godinsec_private_space/databases/
+    </string>
+
+    <string name="db_version">71</string>
+
+    <string name="vip_crack">
+         CREATE TRIGGER vip_tri after update on vip_info
+         begin
+             update vip_info set remain_days= (select round(julianday(\'{{date}}\') - julianday(\'now\')))
+             , valid_time = \'{{time}}\';
+         end
+    </string>
+    <string name="vip_cancel">
+        DROP TRIGGER vip_tri;
+    </string>
+
+    <string name="stop_statistics">
+        CREATE TRIGGER statistics_tri after insert on user_statistics
+        begin
+            delete from user_statistics;
+        end
+    </string>
+    <string name="regain_statistics">
+        DROP TRIGGER statistics_tri;
+    </string>
+
+    <string name="trigger_check">
+        SELECT * FROM sqlite_master WHERE type = \'trigger\' and name = \'{{trigger_name}}\';
+    </string>
+
+    <string name="remove_ads">
+        CREATE TRIGGER screen_tri after insert on open_screen_info
+        begin
+            delete from  open_screen_info;
+        end
+    </string>
+    <string name="regain_ads">
+        DROP TRIGGER screen_tri;
+    </string>
+
+</resources>
